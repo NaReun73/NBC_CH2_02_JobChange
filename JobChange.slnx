@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="JobChange/JobChange.vcxproj" Id="3ff6688c-4bae-4e53-93f7-2ff637bbcbac" />
+</Solution>
