@@ -1,4 +1,5 @@
 ﻿#include "Monster.h"
+#include "Player.h"
 #include <iostream>
 
 Monster::Monster(std::string name)

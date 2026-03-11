@@ -1,4 +1,5 @@
 ﻿#include "Thief.h"
+#include "Monster.h"
 #include <iostream>
 
 Thief::Thief(std::string nickname)

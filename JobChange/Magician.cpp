@@ -1,4 +1,5 @@
 ﻿#include "Magician.h"
+#include "Monster.h"
 #include <iostream>
 
 Magician::Magician(std::string nickname)

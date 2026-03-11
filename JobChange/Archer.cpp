@@ -1,4 +1,5 @@
 ﻿#include "Archer.h"
+#include "Monster.h"
 #include <iostream>
 
 Archer::Archer(std::string nickname)

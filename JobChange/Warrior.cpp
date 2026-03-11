@@ -1,4 +1,5 @@
 ﻿#include "Warrior.h"
+#include "Monster.h"
 #include <iostream>
 
 Warrior::Warrior(std::string nickname)
