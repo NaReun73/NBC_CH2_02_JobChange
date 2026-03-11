@@ -219,3 +219,124 @@
     ```
     
 </aside>
+
+<aside>
+
+### 도전 구현 기능
+
+---
+
+- `Monster` 클래스를 작성해주세요!
+    - [x]  **기본 속성 및 생성자 구현**
+        - 이름(`name`), HP(10), 공격력(30), 방어력(10), 스피드(10)를 속성으로 가집니다.
+        - 생성자에서 이름을 입력받고, 모든 능력치를 기본값으로 초기화하세요.
+    - [x]  **Monster의 공격 함수 (`attack`)**
+        - 매개변수로 `Player*`를 전달받아 플레이어를 공격합니다.
+        - **데미지 공식:** `몬스터 공격력 - 플레이어 방어력` (결과가 0 이하이면 1로 고정)
+        - 플레이어의 `setHP`를 호출하여 체력을 갱신하고, 남은 HP를 화면에 보여주세요.
+    - [x]  **Getter / Setter 구현**
+        - 외부에서 몬스터의 이름, HP 등에 접근하고 수정할 수 있도록 모든 Get/Set 함수를 만드세요.
+    - **[코드스니펫] Monster 클래스 요구사항**
+        
+        ```cpp
+        class Monster {
+        public:
+        		// Monster 생성자
+        		// - 몬스터의 이름을 매개변수로 입력 받습니다.
+        		// - 모든 몬스터는 HP 10, 공격력 30, 방어력 10, 스피드 10의 능력치를 가집니다.
+            Monster(string name);
+            
+            // 몬스터의 공격 함수
+            // - 플레이어 객체 포인터를 매개변수로 입력 받습니다.
+            // - 몬스터의 공격력-플레이어의 방어력을 데미지로 정의합니다.
+            // - 만약 위에서 계산한 데미지가 0 이하라면, 데미지를 1로 정의합니다.
+            // - 플레이어에게 얼마나 데미지를 입혔는지 출력합니다.
+            // - 플레이어 객체의 getHP 함수를 실행하여 플레이어HP-데미지 계산 결과를
+            // - 플레이어 객체의 setHP 매개변수로 전달합니다.
+            // - 플레이어가 생존했을 경우, 플레이어의 남은 HP를 출력합니다.
+            void attack(Player* player);
+            
+            // 몬스터의 속성값을 리턴하는 get 함수
+            string getName();
+            int getHP();
+            int getPower();
+            int getDefence();
+            int getSpeed();
+        		
+        		// 몬스터의 속성값을 정의하는 set 함수
+            void setName(string name);
+            void setHP(int HP);
+            void setPower(int power);
+            void setDefence(int defence);
+            void setSpeed(int speed);
+        
+        protected:
+            string name; // 몬스터의 이름
+            int HP; // 몬스터의 HP
+            int power; // 몬스터의 공격력
+            int defence; // 몬스터의 방어력
+            int speed; // 몬스터의 스피드
+        };
+        ```
+        
+- Player의  attack() 함수를 오버로딩하여 `attack(Monster* monster)`함수를 구현합니다.
+    - [x]  **기본 속성 및 생성자 구현**
+        - 이름(`name`), HP(10), 공격력(30), 방어력(10), 스피드(10)를 속성으로 가집니다.
+        - 생성자에서 이름을 입력받고, 모든 능력치를 기본값으로 초기화하세요.
+    - [x]  **Monster의 공격 함수 (`attack`)**
+        - 매개변수로 `Player*`를 전달받아 플레이어를 공격합니다.
+        - **데미지 공식:** `몬스터 공격력 - 플레이어 방어력` (결과가 0 이하이면 1로 고정)
+        - 플레이어의 `setHP`를 호출하여 체력을 갱신하고, 남은 HP를 화면에 보여주세요.
+    - [x]  **Getter / Setter 구현**
+        - 외부에서 몬스터의 이름, HP 등에 접근하고 수정할 수 있도록 모든 Get/Set 함수를 만드세요.
+    - [x]  **생존 확인 및 메시지 출력**
+        - 몬스터의 HP를 갱신한 후, 몬스터가 죽었는지 살았는지 확인하세요.
+        - **생존 시:** 몬스터의 남은 HP를 출력합니다.
+        - **사망 시:** 축하 메시지를 출력합니다.
+    - **[코드스니펫] attack(Monster* monster) 함수 요구사항**
+        - `player.h`
+        
+        ```cpp
+        class Monster;
+        
+        class Player {
+        public:
+            Player(string nickname);
+        
+            virtual void attack() = 0;
+            virtual void attack(Monster* monster) = 0;
+            void printPlayerStatus();
+        
+            // getter
+            // ...
+            
+            // setter
+            // ...
+        
+        protected:
+            // attributes
+        };
+        ```
+        
+        - `warrior.cpp`, `magician.cpp`, `thief.cpp`, `archer.cpp`
+        
+        ```cpp
+        void JobName::attack(Monster* monster) {
+            // 플레이어의 공격력-몬스터의 방어력을 계산하여 데미지로 정의합니다.
+        		// 계산된 데미지가 0 이하일 경우, 데미지를 1로 정의합니다.
+        		
+        		// 공격 문장을 출력합니다.
+        		// - 전사, 마법사: 계산된 데미지로 1회 공격
+        		// - 궁수: 계산된 데미지/3으로 3회 공격 (소수점 생략)
+        		// - 도적: 계산된 데미지/5으로 5회 공격 (소수점 생략)
+        		// - 궁수와 도적의 경우, 3과 5로 나눈 결과가 0이라면 1로 정의합니다.
+        		// ex) * 슬라임에게 화살로 3의 피해를 입혔다! 3번 출력
+        		
+        		// 몬스터의 setHP를 호출하여 몬스터의 HP-데미지를 계산한 값을 매개변수로 전달합니다.
+        		// 몬스터의 getHP를 호출 분기문이 실행됩니다.
+        		// 몬스터가 생존했을 경우 몬스터의 남은 HP 출력
+        		// 몬스터가 생존하지 못했을 경우 플레이어의 승리 문구 출력
+        }
+        ```
+        
+</aside>
